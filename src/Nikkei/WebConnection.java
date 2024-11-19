@@ -9,13 +9,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-public class WebStream {
+public class WebConnection {
     private URL url;
     private HttpURLConnection connection;
     private InputStream stream;
     private InputStreamReader reader;
 
-    public WebStream(URL url){
+    public WebConnection(URL url){
         this.url = url;
         try{
             connection = (HttpURLConnection) this.url.openConnection();
@@ -51,9 +51,9 @@ public class WebStream {
     }
     
     public static void main(String[] args){
-        WebStream parser;
+        WebConnection parser;
         try{
-            parser = new WebStream(
+            parser = new WebConnection(
                 new URI("http://www.w3.org/").toURL()
             );
             System.out.println(parser.toString());
