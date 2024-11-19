@@ -1,6 +1,7 @@
 package Nikkei;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -11,6 +12,7 @@ import java.net.URL;
 public class WebStream {
     private URL url;
     private HttpURLConnection connection;
+    private InputStream stream;
     private InputStreamReader reader;
 
     public WebStream(URL url){
@@ -27,7 +29,8 @@ public class WebStream {
             );
             connection.setInstanceFollowRedirects(false);
 
-            reader = new InputStreamReader(connection.getInputStream(), "UTF-8");
+            stream = connection.getInputStream();
+            reader = new InputStreamReader(stream, "UTF-8");
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -36,6 +39,10 @@ public class WebStream {
     // return InputStreamReader object
     public InputStreamReader reader(){
         return reader;
+    }
+
+    public InputStream stream(){
+        return stream;
     }
 
     // return current handling URL
